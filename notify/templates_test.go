@@ -47,6 +47,20 @@ func TestTemplateSimple(t *testing.T) {
 			Errors: nil,
 		},
 	}, {
+		name: "valid template with parseJson",
+		input: TestTemplatesConfigBodyParams{
+			Alerts:   []*amv2.PostableAlert{&simpleAlert},
+			Name:     "slack.title",
+			Template: `{{ ("{\"a\":\"b\"}" | fromJson).a }}`,
+		},
+		expected: TestTemplatesResults{
+			Results: []TestTemplatesResult{{
+				Name: "slack.title",
+				Text: "b",
+			}},
+			Errors: nil,
+		},
+	}, {
 		name: "valid template with builtin function",
 		input: TestTemplatesConfigBodyParams{
 			Alerts:   []*amv2.PostableAlert{&simpleAlert},

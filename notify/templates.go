@@ -86,7 +86,9 @@ func (am *GrafanaAlertmanager) TestTemplate(ctx context.Context, c TestTemplates
 
 	// Parse current templates.
 	var newTextTmpl *tmpltext.Template
-	var captureTemplate template.Option = func(text *tmpltext.Template, _ *tmplhtml.Template) {
+	var captureTemplate template.Option = func(text *tmpltext.Template, html *tmplhtml.Template) {
+		text.Funcs(tmpltext.FuncMap(templates.ExtendedFuncs))
+		html.Funcs(tmplhtml.FuncMap(templates.ExtendedFuncs))
 		newTextTmpl = text
 	}
 	newTmpl, err := am.TemplateFromPaths(paths, captureTemplate)
@@ -133,7 +135,7 @@ func (am *GrafanaAlertmanager) TestTemplate(ctx context.Context, c TestTemplates
 
 // parseTestTemplate parses the test template and returns the top-level definitions that should be interpolated as results.
 func parseTestTemplate(name string, text string) ([]string, error) {
-	tmpl, err := tmpltext.New(name).Funcs(tmpltext.FuncMap(template.DefaultFuncs)).Parse(text)
+	tmpl, err := tmpltext.New(name).Funcs(tmpltext.FuncMap(templates.DefaultFuncs)).Parse(text)
 	if err != nil {
 		return nil, err
 	}

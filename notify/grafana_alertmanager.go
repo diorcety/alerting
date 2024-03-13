@@ -10,6 +10,8 @@ import (
 	"sync"
 	"time"
 	"unicode/utf8"
+	tmplhtml "html/template"
+	tmpltext "text/template"
 
 	"github.com/prometheus/alertmanager/template"
 
@@ -369,7 +371,12 @@ func (am *GrafanaAlertmanager) ApplyConfig(cfg Configuration) (err error) {
 		paths = append(paths, filepath.Join(am.workingDirectory, name))
 	}
 
-	tmpl, err := am.TemplateFromPaths(paths)
+	var extendFuncs template.Option = func(text *tmpltext.Template, html *tmplhtml.Template) {
+		text.Funcs(tmpltext.FuncMap(templates.ExtendedFuncs))
+		html.Funcs(tmplhtml.FuncMap(templates.ExtendedFuncs))
+	}
+
+	tmpl, err := am.TemplateFromPaths(paths, extendFuncs)
 	if err != nil {
 		return err
 	}
