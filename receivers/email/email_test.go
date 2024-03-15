@@ -31,6 +31,7 @@ func TestNotify(t *testing.T) {
 			},
 			Message: "{{ template \"default.title\" . }}",
 			Subject: templates.DefaultMessageTitleEmbed,
+			Template: templates.DefaultTemplate,
 		}
 
 		emailSender := receivers.MockNotificationService()

@@ -11,6 +11,7 @@ import (
 const (
 	DefaultMessageTitleEmbed = `{{ template "default.title" . }}`
 	DefaultMessageEmbed      = `{{ template "default.message" . }}`
+	DefaultTemplate          = `ng_alert_notification`
 )
 
 var DefaultTemplateString = `

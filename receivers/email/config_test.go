@@ -41,6 +41,7 @@ func TestNewConfig(t *testing.T) {
 				},
 				Message: "",
 				Subject: templates.DefaultMessageTitleEmbed,
+				Template: templates.DefaultTemplate,
 			},
 		},
 		{
@@ -56,6 +57,7 @@ func TestNewConfig(t *testing.T) {
 				},
 				Message: "",
 				Subject: templates.DefaultMessageTitleEmbed,
+				Template: templates.DefaultTemplate,
 			},
 		},
 		{
@@ -68,6 +70,7 @@ func TestNewConfig(t *testing.T) {
 				},
 				Message: "",
 				Subject: templates.DefaultMessageTitleEmbed,
+				Template: templates.DefaultTemplate,
 			},
 		},
 		{
@@ -80,6 +83,7 @@ func TestNewConfig(t *testing.T) {
 				},
 				Message: "test-message",
 				Subject: "test-subject",
+				Template: templates.DefaultTemplate,
 			},
 		},
 	}
